@@ -1,5 +1,7 @@
 import React from "react";
 
+import './SetCount.css';
+
 export const SetCount: React.FC = () => {
   return (
     <div className={'set-count-block'}>
