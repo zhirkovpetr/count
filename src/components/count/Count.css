@@ -4,14 +4,14 @@ button:focus  {
   border:none;
 }
 
-.set-count-block {
+.count-block {
   width: 25%;
   border: 2px solid #22f3d0;
   border-radius: 8px;
-  height: 18%
+  height: 14%;
 }
 
-.set-count-screen, .set-count-button{
+.count-screen, .count-button{
   color: #22f3d0;
   border: 2px solid #22f3d0;
   border-radius: 8px;
@@ -19,34 +19,21 @@ button:focus  {
   margin: 10px auto;
 }
 
-.set-count-screen span {
-  font-size: large;
+.count-screen span {
+  font-size: xx-large;
   font-weight: bold;
-  margin-right: 8px;
 }
 
-.set-count-screen input {
-  border: 2px solid #22f3d0;
-  border-radius: 4px;
-  width: 25%;
-  margin: 10px;
-}
-
-.set-count-screen input:focus {
-  border: 3px solid #00ffd1;
-  outline: none;
-}
-
-.max-value {
+.value {
   margin-bottom: 5px;
   height: 40px;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
 }
 
-.start-value {
-  height: 40px;
-}
-
-.set-count-button button {
+.count-button button {
   margin: 10px;
   border-radius: 8px;
   background-color: #22f3d0;
@@ -57,12 +44,12 @@ button:focus  {
   font-weight: bold;
 }
 
-.set-count-button button:hover {
+.count-button button:hover {
   background-color: #199a85;
   color: #495d5d;
 }
 
-.set-count-button button:active {
+.count-button button:active {
   background-color: #113832;
   color: #9dafaf;
 }
