@@ -1,0 +1,68 @@
+button,
+button:active,
+button:focus  {
+  border:none;
+}
+
+.set-count-block {
+  width: 25%;
+  border: 2px solid #22f3d0;
+  border-radius: 8px;
+  margin: 0 auto;
+}
+
+.set-count-screen, .set-count-button{
+  color: #22f3d0;
+  border: 2px solid #22f3d0;
+  border-radius: 8px;
+  width: 90%;
+  margin: 10px auto;
+}
+
+.set-count-screen span {
+  font-size: large;
+  font-weight: bold;
+  margin-right: 8px;
+}
+
+.set-count-screen input {
+  border: 2px solid #22f3d0;
+  border-radius: 4px;
+  width: 25%;
+  margin: 10px;
+}
+
+.set-count-screen input:focus {
+  border: 3px solid #00ffd1;
+  outline: none;
+}
+
+.max-value {
+  margin-bottom: 5px;
+  height: 40px;
+}
+
+.start-value {
+  height: 40px;
+}
+
+.set-count-button button {
+  margin: 10px;
+  border-radius: 8px;
+  background-color: #22f3d0;
+  color: #141e1e;
+  width: 80px;
+  height: 30px;
+  font-size: x-large;
+  font-weight: bold;
+}
+
+.set-count-button button:hover {
+  background-color: #199a85;
+  color: #495d5d;
+}
+
+.set-count-button button:active {
+  background-color: #113832;
+  color: #9dafaf;
+}
