@@ -4,4 +4,6 @@
   margin: 0;
   height: 100vh;
   padding-top: 25px;
+  display: flex;
+  justify-content: space-evenly;
 }
