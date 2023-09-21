@@ -1,7 +1,8 @@
 import React, {useState} from "react";
 
-import './Count.css';
 import {Button} from "../button/Button";
+
+import './Count.css';
 
 type CountPropsType = {
   minValue: number

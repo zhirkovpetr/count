@@ -36,24 +36,3 @@ button:focus  {
 .value .active {
   color: red;
 }
-
-.count-button button {
-  margin: 10px;
-  border-radius: 8px;
-  background-color: #22f3d0;
-  color: #141e1e;
-  width: 80px;
-  height: 30px;
-  font-size: x-large;
-  font-weight: bold;
-}
-
-.count-button button:hover {
-  background-color: #199a85;
-  color: #495d5d;
-}
-
-.count-button button:active {
-  background-color: #113832;
-  color: #9dafaf;
-}
