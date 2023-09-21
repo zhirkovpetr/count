@@ -33,6 +33,10 @@ button:focus  {
   align-items: center;
 }
 
+.value .active {
+  color: red;
+}
+
 .count-button button {
   margin: 10px;
   border-radius: 8px;
