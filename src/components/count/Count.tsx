@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 
 import {Button} from "../button/Button";
 
@@ -7,13 +7,15 @@ import './Count.css';
 type CountPropsType = {
   minValue: number
   maxValue: number
+  count: number
+  setCount: (count: number) => void
   //errorValue: boolean
   //setErrorValue: (errorValue: boolean) => void
 }
 
 export const Count: React.FC<CountPropsType> = (props) => {
-  let {minValue, maxValue} = props
-  let [count, setCount] = useState<number>(0)
+  let {minValue, maxValue, count, setCount} = props
+
 
   const onClickIncrease = () => {
     if(count < maxValue) {
