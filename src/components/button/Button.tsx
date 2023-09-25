@@ -4,12 +4,17 @@ import './Button.css';
 
 type ButtonPropsType = {
   title: string
-  disabled: boolean
+  disaebledButton: boolean
   onClick: () => void
+  maxValue: number
+  minValue: number
+  editMode: boolean
+  error: boolean
 }
 
 export const Button: React.FC<ButtonPropsType> = (props) => {
-  let {title, disabled, onClick} = props
-
-  return <button onClick={onClick} disabled={disabled} className={disabled ? 'button button-disabled' : 'button'}>{title}</button>
+  let {title, disaebledButton, onClick} = props
+  return (
+    <button onClick={onClick} disabled={disaebledButton} className={disaebledButton ? 'button button-disabled' : 'button'}>{title}</button>
+  )
 }

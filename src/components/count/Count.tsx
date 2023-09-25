@@ -1,6 +1,7 @@
 import React from "react";
 
-import {Button} from "../button/Button";
+import {Screen} from "../screen/Screen";
+import {CountButtons} from "../count-buttons/CountButtons";
 
 import './Count.css';
 
@@ -9,35 +10,18 @@ type CountPropsType = {
   maxValue: number
   count: number
   setCount: (count: number) => void
-  //errorValue: boolean
-  //setErrorValue: (errorValue: boolean) => void
+  editMode: boolean
+  error: boolean
 }
 
 export const Count: React.FC<CountPropsType> = (props) => {
-  let {minValue, maxValue, count, setCount} = props
+  let {minValue, maxValue, count, setCount, editMode, error} = props
 
-
-  const onClickIncrease = () => {
-    if(count < maxValue) {
-      setCount(count + 1)
-    }
-  }
-
-  const onClickReset = () => {
-    setCount(minValue)
-  }
 
   return (
     <div className={'count-block'}>
-      <div className={'count-screen'}>
-        <div className={'value'}>
-          <span className={count === maxValue ? 'active' : ''}>{count}</span>
-        </div>
-      </div>
-      <div className={'count-button'}>
-        <Button title={'inc'} onClick={onClickIncrease} disabled={count === maxValue}/>
-        <Button title={'reset'} onClick={onClickReset} disabled={count === minValue}/>
-      </div>
+      <Screen count={count} editMode={editMode} maxValue={maxValue} error={error}/>
+      <CountButtons count={count} editMode={editMode} setCount={setCount} maxValue={maxValue} minValue={minValue} error={error} />
     </div>
   )
 }
