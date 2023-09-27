@@ -6,70 +6,68 @@ import {Count} from "./components/count/Count";
 import './App.css';
 
 export const App: React.FC = () => {
-  let [minValue, setMinValue] = useState<number>(0)
-  let [maxValue, setMaxValue] = useState<number>(5)
-  let [count, setCount] = useState<number>(0)
-  let [error, setError] = useState<boolean>(false)
-  let [editMode, setEditMode] = useState<boolean>(true)
+  const [minValue, setMinValue] = useState(0)
+  const [maxValue, setMaxValue] = useState(5)
+  const [count, setCount] = useState(0)
+  const [error, setError] = useState(false)
+  const [editMode, setEditMode] = useState(true)
 
   useEffect(() => {
-      let valueAsString = localStorage.getItem('minValue')
-      if (valueAsString) {
-        let newValue = JSON.parse(valueAsString)
-        setMinValue(newValue)
+      const minValueAsString = localStorage.getItem('minValue')
+      const maxValueAsString = localStorage.getItem('maxValue')
+      const countAsString = localStorage.getItem("count")
+      const editModeAsString = localStorage.getItem("editMode")
+
+      if (minValueAsString) {
+        setMinValue(JSON.parse(minValueAsString))
+      }
+      if (maxValueAsString) {
+        setMaxValue(JSON.parse(maxValueAsString))
+      }
+      if (countAsString) {
+        setCount(JSON.parse(countAsString))
+      }
+      if (editModeAsString) {
+        setEditMode(JSON.parse(editModeAsString))
       }
     }
     , [])
-
-  useEffect(() => {
-      let valueAsString = localStorage.getItem('maxValue')
-      if (valueAsString) {
-        let newValue = JSON.parse(valueAsString)
-        setMaxValue(newValue)
-      }
-    }
-    , [])
-
-  useEffect(() => {
-    let countString = localStorage.getItem("count")
-    if (countString) {
-      let countNumber = JSON.parse(countString)
-      setCount(countNumber)
-    }
-  }, [])
-
-  useEffect(() => {
-    let editMode = localStorage.getItem("editMode")
-    if (editMode) {
-      let editModeLS = JSON.parse(editMode)
-      setEditMode(editModeLS)
-    }
-  }, [])
 
   useEffect(() => {
     localStorage.setItem('minValue', JSON.stringify(minValue))
+  }, [minValue])
+
+  useEffect(() => {
     localStorage.setItem('maxValue', JSON.stringify(maxValue))
+  }, [maxValue])
+
+  useEffect(() => {
     localStorage.setItem("editMode", JSON.stringify(editMode));
+  }, [editMode])
+
+  useEffect(() => {
     localStorage.setItem("count", JSON.stringify(minValue));
-  }, [minValue, maxValue, editMode])
+  }, [minValue])
 
   return (
     <div className="App">
-      <SetCount minValue={minValue}
-                maxValue={maxValue}
-                setMinValue={setMinValue}
-                setMaxValue={setMaxValue}
-                setCount={setCount}
-                setEditMode={setEditMode}
-                error={error}
-                setError={setError}
+      <SetCount
+        minValue={minValue}
+        maxValue={maxValue}
+        setMinValue={setMinValue}
+        setMaxValue={setMaxValue}
+        setCount={setCount}
+        setEditMode={setEditMode}
+        error={error}
+        setError={setError}
       />
-      <Count minValue={minValue}
-             maxValue={maxValue}
-             count={count}
-             setCount={setCount}
-             editMode={editMode}
-             error={error}
+      <Count
+        minValue={minValue}
+        maxValue={maxValue}
+        count={count}
+        setCount={setCount}
+        editMode={editMode}
+        error={error}
       />
     </div>
   );

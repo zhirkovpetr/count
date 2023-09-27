@@ -15,7 +15,7 @@ type CountPropsType = {
 }
 
 export const Count: React.FC<CountPropsType> = (props) => {
-  let {minValue, maxValue, count, setCount, editMode, error} = props
+  const {minValue, maxValue, count, setCount, editMode, error} = props
 
   return (
     <div className={'count-block'}>

@@ -13,8 +13,8 @@ type InputsBlockPropsType = {
   setError: (error: boolean) => void
 }
 
-export const InputsBlock:React.FC<InputsBlockPropsType> = (props) => {
-  let {error, maxValue, minValue, setMaxValue, setMinValue, setError} =props
+export const InputsBlock: React.FC<InputsBlockPropsType> = (props) => {
+  const {error, maxValue, minValue, setMaxValue, setMinValue, setError} = props
 
   useEffect(() => {
     if (minValue >= maxValue || minValue < 0 || maxValue < 0) {

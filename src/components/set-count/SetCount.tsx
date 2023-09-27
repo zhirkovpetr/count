@@ -17,7 +17,7 @@ type SetCountPropsType = {
 }
 
 export const SetCount: React.FC<SetCountPropsType> = (props) => {
-  let {minValue, maxValue, setMinValue, setMaxValue, setCount, setEditMode, error, setError} = props
+  const {minValue, maxValue, setMinValue, setMaxValue, setCount, setEditMode, error, setError} = props
 
   const onSetValue = () => {
     setEditMode(false)

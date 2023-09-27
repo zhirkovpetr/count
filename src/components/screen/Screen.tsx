@@ -10,7 +10,7 @@ type ScreenPropsType = {
 }
 
 export const Screen: React.FC<ScreenPropsType> = (props) => {
-  let{editMode, error, maxValue, count} = props
+  const {editMode, error, maxValue, count} = props
   return (
     <div className={'count-screen'}>
       <div className={'value'}>

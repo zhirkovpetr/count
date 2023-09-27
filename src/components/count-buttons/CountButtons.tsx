@@ -13,7 +13,7 @@ type CountButtonsPropsType = {
 }
 
 export const CountButtons: React.FC<CountButtonsPropsType> = (props) => {
-  let {count, maxValue, minValue, setCount, error} = props
+  const {count, maxValue, minValue, setCount, error} = props
 
   const onClickIncrease = () => {
     setCount((prevCount: number) => prevCount + 1);
