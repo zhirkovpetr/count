@@ -13,12 +13,9 @@ type InputPropsType = {
 export const Input:React.FC<InputPropsType> = (props) => {
   let {error, setValue, className, title, value} =props
 
-
     const onChangeValue = (e: ChangeEvent<HTMLInputElement>) => {
-      //setEditMode(false)
       setValue(Number(e.currentTarget.value))
     }
-
 
     return (
     <div className={className}>

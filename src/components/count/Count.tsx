@@ -9,7 +9,7 @@ type CountPropsType = {
   minValue: number
   maxValue: number
   count: number
-  setCount: (count: number) => void
+  setCount: React.Dispatch<React.SetStateAction<number>>
   editMode: boolean
   error: boolean
 }
@@ -17,11 +17,10 @@ type CountPropsType = {
 export const Count: React.FC<CountPropsType> = (props) => {
   let {minValue, maxValue, count, setCount, editMode, error} = props
 
-
   return (
     <div className={'count-block'}>
       <Screen count={count} editMode={editMode} maxValue={maxValue} error={error}/>
-      <CountButtons count={count} editMode={editMode} setCount={setCount} maxValue={maxValue} minValue={minValue} error={error} />
+      <CountButtons count={count} setCount={setCount} maxValue={maxValue} minValue={minValue} error={error}/>
     </div>
   )
 }

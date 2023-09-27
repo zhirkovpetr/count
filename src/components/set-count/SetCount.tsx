@@ -8,7 +8,6 @@ import './SetCount.css';
 type SetCountPropsType = {
   minValue: number
   maxValue: number
-  editMode: boolean
   setMinValue: (minValue: number) => void
   setMaxValue: (maxValue: number) => void
   setCount: (count: number) => void
@@ -18,7 +17,7 @@ type SetCountPropsType = {
 }
 
 export const SetCount: React.FC<SetCountPropsType> = (props) => {
-  let{ minValue, maxValue, setMinValue, setMaxValue, setCount, editMode, setEditMode, error, setError } = props
+  let {minValue, maxValue, setMinValue, setMaxValue, setCount, setEditMode, error, setError} = props
 
   const onSetValue = () => {
     setEditMode(false)
@@ -29,9 +28,13 @@ export const SetCount: React.FC<SetCountPropsType> = (props) => {
 
   return (
     <div className={'set-count-block'}>
-      <InputsBlock minValue={minValue} maxValue={maxValue} setError={setError} setMinValue={setMinValue} setMaxValue={setMaxValue} error={error}/>
+      <InputsBlock
+        minValue={minValue} maxValue={maxValue} setError={setError} setMinValue={setMinValue} setMaxValue={setMaxValue}
+        error={error}/>
       <div className={'set-count-button'}>
-        <Button title={'set'} editMode={editMode} maxValue={maxValue} minValue={minValue} onClick={onSetValue} disaebledButton={error || minValue === maxValue || minValue < 0 || maxValue < 0 || minValue > maxValue} error={error}/>
+        <Button
+          title={'set'} onClick={onSetValue}
+          disabledButton={error || minValue === maxValue || minValue < 0 || maxValue < 0 || minValue > maxValue}/>
       </div>
     </div>
   )

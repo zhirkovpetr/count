@@ -60,7 +60,6 @@ export const App: React.FC = () => {
                 setMinValue={setMinValue}
                 setMaxValue={setMaxValue}
                 setCount={setCount}
-                editMode={editMode}
                 setEditMode={setEditMode}
                 error={error}
                 setError={setError}
