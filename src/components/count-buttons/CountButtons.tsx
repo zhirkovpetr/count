@@ -6,21 +6,21 @@ import './CountButtons.css';
 
 type CountButtonsPropsType = {
   maxValue: number
-  minValue: number
   count: number
-  setCount: React.Dispatch<React.SetStateAction<number>>
   error: boolean
+  increase: () => void
+  reset: () => void
 }
 
 export const CountButtons: React.FC<CountButtonsPropsType> = (props) => {
-  const {count, maxValue, minValue, setCount, error} = props
+  let {count, maxValue, error, increase, reset} = props
 
   const onClickIncrease = () => {
-    setCount((prevCount: number) => prevCount + 1);
+    increase();
   }
 
   const onClickReset = () => {
-    setCount(minValue)
+    reset()
   }
   return (
     <div className={'count-button'}>
