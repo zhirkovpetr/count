@@ -1,18 +1,17 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 
 import {SetCount} from "./components/set-count/SetCount";
 import {Count} from "./components/count/Count";
+import {useAppDispatch, useAppSelector} from "./hooks/ReduxHooks";
+import {setCount, setEditMode, setError, setMaxValue, setMinValue} from "./redux/count-slice";
 
 import './App.css';
 
 export const App: React.FC = () => {
-  const [minValue, setMinValue] = useState(0)
-  const [maxValue, setMaxValue] = useState(5)
-  const [count, setCount] = useState(0)
-  const [error, setError] = useState(false)
-  const [editMode, setEditMode] = useState(true)
+  const { minValue, maxValue, count, error, editMode } = useAppSelector(state => state.countSlice);
+  const dispatch = useAppDispatch();
 
-  useEffect(() => {
+/*  useEffect(() => {
       const minValueAsString = localStorage.getItem('minValue')
       const maxValueAsString = localStorage.getItem('maxValue')
       const countAsString = localStorage.getItem("count")
@@ -31,9 +30,9 @@ export const App: React.FC = () => {
         setEditMode(JSON.parse(editModeAsString))
       }
     }
-    , [])
+    , [])*/
 
-  useEffect(() => {
+/*  useEffect(() => {
     localStorage.setItem('minValue', JSON.stringify(minValue))
   }, [minValue])
 
@@ -47,26 +46,61 @@ export const App: React.FC = () => {
 
   useEffect(() => {
     localStorage.setItem("count", JSON.stringify(minValue));
-  }, [minValue])
+  }, [minValue])*/
+
+
+  const updateMinValue = (minValue: number) => {
+    dispatch(setMinValue({minValue}))
+  }
+
+  const updateMaxValue = (maxValue: number) => {
+    dispatch(setMaxValue({maxValue}))
+  }
+
+  const updateCount = (count: number) => {
+    dispatch(setCount({count}))
+  }
+
+  const updateEditMode = (editMode: boolean) => {
+    dispatch(setEditMode({editMode}))
+  }
+
+  const updateError = (error: boolean) => {
+    dispatch(setError({error}))
+  }
+
+  const onSetValue = () => {
+    updateEditMode(false)
+    updateMinValue(minValue)
+    updateMaxValue(maxValue)
+    updateCount(minValue)
+  }
+
+  const increase = () => {
+    updateCount(count + 1);
+  }
+
+  const reset = () => {
+    updateCount(minValue)
+  }
 
   return (
     <div className="App">
       <SetCount
         minValue={minValue}
         maxValue={maxValue}
-        setMinValue={setMinValue}
-        setMaxValue={setMaxValue}
-        setCount={setCount}
-        setEditMode={setEditMode}
+        setMinValue={updateMinValue}
+        setMaxValue={updateMaxValue}
         error={error}
-        setError={setError}
+        setError={updateError}
+        onSetValue={onSetValue}
       />
       <Count
-        minValue={minValue}
         maxValue={maxValue}
         count={count}
-        setCount={setCount}
         editMode={editMode}
+        increase={increase}
+        reset={reset}
         error={error}
       />
     </div>
