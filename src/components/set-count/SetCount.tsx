@@ -2,31 +2,47 @@ import React from "react";
 
 import {Button} from "../button/Button";
 import {InputsBlock} from "../inputs-block/InputsBlock";
+import {setCount, setEditMode, setMaxValue, setMinValue} from "../../redux/count-slice";
+import {useAppDispatch, useAppSelector} from "../../hooks/ReduxHooks";
 
 import './SetCount.css';
 
-type SetCountPropsType = {
-  minValue: number
-  maxValue: number
-  setMinValue: (minValue: number) => void
-  setMaxValue: (maxValue: number) => void
-  setError: (error: boolean) => void
-  onSetValue: () => void
-  error: boolean
-}
+export const SetCount: React.FC = () => {
+  const { minValue, maxValue, error, editMode } = useAppSelector(state => state.countSlice.counter);
+  const dispatch = useAppDispatch();
 
-export const SetCount: React.FC<SetCountPropsType> = (props) => {
-  const {minValue, maxValue, setMinValue, setMaxValue,error, setError, onSetValue} = props
+  const updateMinValue = (minValue: number) => {
+    dispatch(setMinValue({minValue}))
+  }
+
+  const updateMaxValue = (maxValue: number) => {
+    dispatch(setMaxValue({maxValue}))
+  }
 
   const onClickSetValue = () => {
     onSetValue()
   }
 
+  const updateEditMode = (editMode: boolean) => {
+    dispatch(setEditMode({editMode}))
+  }
+
+  const updateCount = (count: number) => {
+    dispatch(setCount({count}))
+  }
+
+  const onSetValue = () => {
+    updateEditMode(false)
+    updateMinValue(minValue)
+    updateMaxValue(maxValue)
+    updateCount(minValue)
+    localStorage.setItem('counter', JSON.stringify({ minValue, maxValue, count: minValue, editMode, error }))
+  }
+
   return (
     <div className={'set-count-block'}>
       <InputsBlock
-        minValue={minValue} maxValue={maxValue} setError={setError} setMinValue={setMinValue} setMaxValue={setMaxValue}
-        error={error}/>
+        minValue={minValue} maxValue={maxValue} setMinValue={updateMinValue} setMaxValue={updateMaxValue} error={error}/>
       <div className={'set-count-button'}>
         <Button
           title={'set'} onClick={onClickSetValue}

@@ -2,6 +2,7 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {
   TCountSliceState,
   TSetCount,
+  TSetCounter,
   TSetEditMode,
   TSetError,
   TSetMaxValue,
@@ -10,11 +11,13 @@ import {
 
 
 export const initialState: TCountSliceState = {
-  minValue: 0,
-  maxValue: 5,
-  count: 0,
-  error: false,
-  editMode: true,
+  counter: {
+    minValue: 0,
+    maxValue: 5,
+    count: 0,
+    error: false,
+    editMode: true,
+  }
 };
 
 const countSlice = createSlice({
@@ -22,27 +25,35 @@ const countSlice = createSlice({
   initialState,
   reducers: {
     setMinValue: (state, action: PayloadAction<TSetMinValue>) => ({
-      ...state,
-      minValue: action.payload.minValue,
+      ...state, counter: {
+        ...state.counter, minValue: action.payload.minValue,
+      }
     }),
     setMaxValue: (state, action: PayloadAction<TSetMaxValue>) => ({
-      ...state,
-      maxValue: action.payload.maxValue,
+      ...state, counter: {
+        ...state.counter, maxValue: action.payload.maxValue,
+      }
     }),
     setCount: (state, action: PayloadAction<TSetCount>) => ({
-      ...state,
-      count: action.payload.count,
+      ...state, counter: {
+        ...state.counter, count: action.payload.count,
+      }
     }),
     setEditMode: (state, action: PayloadAction<TSetEditMode>) => ({
-      ...state,
-      editMode: action.payload.editMode,
+      ...state, counter: {
+        ...state.counter, editMode: action.payload.editMode,
+      }
     }),
     setError: (state, action: PayloadAction<TSetError>) => ({
-      ...state,
-      error: action.payload.error,
+      ...state, counter: {
+        ...state.counter, error: action.payload.error,
+      }
     }),
-  },
+    setStateLS: (state, action: PayloadAction<TSetCounter>) => {
+      state.counter = action.payload
+    }
+  }
 });
 
-export const { setMinValue, setMaxValue, setCount, setEditMode, setError } = countSlice.actions;
+export const {setMinValue, setMaxValue, setCount, setEditMode, setError, setStateLS} = countSlice.actions;
 export default countSlice.reducer;
