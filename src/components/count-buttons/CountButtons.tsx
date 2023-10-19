@@ -1,31 +1,31 @@
 import React from "react";
 
 import {Button} from "../button/Button";
+import {TSetCounter} from "../../interfaces/interfaces";
 
 import './CountButtons.css';
 
 type CountButtonsPropsType = {
-  maxValue: number
-  count: number
-  error: boolean
-  increase: () => void
-  reset: () => void
+  counter: TSetCounter
+  updateCount: (count: number) => void
 }
 
 export const CountButtons: React.FC<CountButtonsPropsType> = (props) => {
-  let {count, maxValue, error, increase, reset} = props
+  let {updateCount} = props
+  let {count, minValue, maxValue, error} = props.counter
 
-  const onClickIncrease = () => {
-    increase();
+  const increase = () => {
+    updateCount(count + 1);
   }
 
-  const onClickReset = () => {
-    reset()
+  const reset = () => {
+    updateCount(minValue)
   }
+
   return (
     <div className={'count-button'}>
-      <Button title={'inc'} onClick={onClickIncrease} disabledButton={count === maxValue || error}/>
-      <Button title={'reset'} onClick={onClickReset} disabledButton={count !== maxValue || error}/>
+      <Button title={'inc'} onClick={increase} disabledButton={count === maxValue || error}/>
+      <Button title={'reset'} onClick={reset} disabledButton={count !== maxValue || error}/>
     </div>
   )
 }

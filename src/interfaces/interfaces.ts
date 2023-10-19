@@ -5,11 +5,13 @@ export type TAppStore = ReturnType<typeof setupStore>;
 export type TAppDispatch = TAppStore['dispatch'];
 
 export type TCountSliceState = {
-  minValue: number;
-  maxValue: number;
-  count: number;
-  error: boolean;
-  editMode: boolean;
+  counter: {
+    minValue: number;
+    maxValue: number;
+    count: number;
+    error: boolean;
+    editMode: boolean;
+  }
 };
 
 export type TSetMinValue = {
@@ -30,4 +32,12 @@ export type TSetEditMode = {
 
 export type TSetError = {
   error: boolean;
+}
+
+export type TSetCounter = {
+  minValue: number;
+  maxValue: number;
+  count: number;
+  error: boolean;
+  editMode: boolean;
 }
