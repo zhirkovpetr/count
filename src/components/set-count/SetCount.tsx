@@ -8,7 +8,7 @@ import {useAppDispatch, useAppSelector} from "../../hooks/ReduxHooks";
 import './SetCount.css';
 
 export const SetCount: React.FC = () => {
-  const { minValue, maxValue, error, editMode } = useAppSelector(state => state.countSlice.counter);
+  const { minValue, maxValue, error } = useAppSelector(state => state.countSlice.counter);
   const dispatch = useAppDispatch();
 
   const updateMinValue = (minValue: number) => {
@@ -36,7 +36,7 @@ export const SetCount: React.FC = () => {
     updateMinValue(minValue)
     updateMaxValue(maxValue)
     updateCount(minValue)
-    localStorage.setItem('counter', JSON.stringify({ minValue, maxValue, count: minValue, editMode, error }))
+    localStorage.setItem('counter', JSON.stringify({ minValue, maxValue, count: minValue, editMode: false, error }))
   }
 
   return (
