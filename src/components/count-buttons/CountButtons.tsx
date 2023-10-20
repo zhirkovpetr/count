@@ -12,20 +12,22 @@ type CountButtonsPropsType = {
 
 export const CountButtons: React.FC<CountButtonsPropsType> = (props) => {
   let {updateCount} = props
-  let {count, minValue, maxValue, error} = props.counter
+  let {count, minValue, maxValue, error, editMode} = props.counter
 
   const increase = () => {
     updateCount(count + 1);
+    localStorage.setItem('counter', JSON.stringify({ minValue, maxValue, count: count+1, editMode, error }))
   }
 
   const reset = () => {
     updateCount(minValue)
+    localStorage.setItem('counter', JSON.stringify({ minValue, maxValue, count: minValue, editMode: false, error }))
   }
 
   return (
     <div className={'count-button'}>
-      <Button title={'inc'} onClick={increase} disabledButton={count === maxValue || error}/>
-      <Button title={'reset'} onClick={reset} disabledButton={count !== maxValue || error}/>
+      <Button title={'inc'} onClick={increase} disabledButton={count === maxValue || error || editMode}/>
+      <Button title={'reset'} onClick={reset} disabledButton={count !== maxValue || error || editMode}/>
     </div>
   )
 }
