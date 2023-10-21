@@ -41,3 +41,11 @@ export type TSetCounter = {
   error: boolean;
   editMode: boolean;
 }
+
+export type TGetCounter = {
+  minValue: number;
+  maxValue: number;
+  count: number;
+  error: boolean;
+  editMode: boolean;
+}
