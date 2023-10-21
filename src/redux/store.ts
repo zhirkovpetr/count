@@ -9,5 +9,5 @@ export const rootReducer = combineReducers({
 
 export const setupStore = (): Store<TRootState> =>
   configureStore({
-    reducer: rootReducer,
+    reducer: rootReducer
   });
