@@ -1,7 +1,6 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
 
 import {
-  TAppDispatch,
   TCountSliceState,
   TGetCounter,
   TSetCount,
@@ -14,77 +13,70 @@ import {
 
 
 export const initialState: TCountSliceState = {
-  counter: {
     minValue: 0,
     maxValue: 5,
     count: 0,
     error: false,
     editMode: true,
-  }
 };
 
 const countSlice = createSlice({
   name: 'countSlice',
-  initialState,
+  initialState: initialState,
   reducers: {
     setMinValue: (state, action: PayloadAction<TSetMinValue>) => ({
-      ...state, counter: {
-        ...state.counter, minValue: action.payload.minValue,
-      }
+      ...state, minValue: action.payload.minValue
     }),
     setMaxValue: (state, action: PayloadAction<TSetMaxValue>) => ({
-      ...state, counter: {
-        ...state.counter, maxValue: action.payload.maxValue,
-      }
+      ...state, maxValue: action.payload.maxValue
     }),
     setCount: (state, action: PayloadAction<TSetCount>) => ({
-      ...state, counter: {
-        ...state.counter, count: action.payload.count,
-      }
+      ...state, count: action.payload.count
     }),
     setEditMode: (state, action: PayloadAction<TSetEditMode>) => ({
-      ...state, counter: {
-        ...state.counter, editMode: action.payload.editMode,
-      }
+      ...state, editMode: action.payload.editMode
     }),
     setError: (state, action: PayloadAction<TSetError>) => ({
-      ...state, counter: {
-        ...state.counter, error: action.payload.error,
-      }
+      ...state, error: action.payload.error
     }),
     setStateLS: (state, action: PayloadAction<TSetCounter>) => {
-      return {...state, counter: {
-       ...state.counter,
-         minValue: action.payload.minValue,
-         maxValue: action.payload.maxValue,
-         count: action.payload.minValue,
-         editMode: false,
-         error: action.payload.error
-       }}
-    },
-    getStateLS: (state, action: PayloadAction<TGetCounter>) =>{
-      return {...state, counter: {
-        ...state.counter,
+      return {
+        ...state,
           minValue: action.payload.minValue,
           maxValue: action.payload.maxValue,
           count: action.payload.minValue,
-          editMode: true,
+          editMode: false,
           error: action.payload.error
-        }}
+      }
+    },
+    getStateLS: (state, action: PayloadAction<TGetCounter>) => {
+      return {
+        ...state,
+          minValue: action.payload.minValue,
+          maxValue: action.payload.maxValue,
+          count: action.payload.count,
+          editMode: false,
+          error: action.payload.error
+      }
     }
-  }
+  },
 });
 
-export const saveLS = (store: TCountSliceState): any => (dispatch: TAppDispatch) => {
-  localStorage.setItem('counter', JSON.stringify(store))
-  dispatch(setStateLS(store.counter))
-}
+export const saveLS = createAsyncThunk(
+  'countSlice/saveLS',
+  async (store: TSetCounter, {dispatch}) => {
+    localStorage.setItem('counter', JSON.stringify(store));
+    dispatch(setStateLS(store));
+  }
+);
 
-export const loadLS = (): any => (dispatch: TAppDispatch) => {
-  const count = localStorage.getItem('counter')
-  count && console.log(JSON.parse(count))
-  count && dispatch(getStateLS(JSON.parse(count).counter))
-}
+export const loadLS = createAsyncThunk(
+  'countSlice/loadLS',
+  async (_, {dispatch}) => {
+    const count = localStorage.getItem('counter')
+    count && dispatch(getStateLS(JSON.parse(count)))
+  }
+);
 
 export const {setMinValue, setMaxValue, setCount, setEditMode, setError, setStateLS, getStateLS} = countSlice.actions;
 export default countSlice.reducer;

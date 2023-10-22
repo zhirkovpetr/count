@@ -8,7 +8,7 @@ import {useAppDispatch, useAppSelector} from "../../hooks/ReduxHooks";
 import './Count.css';
 
 export const Count: React.FC = () => {
-  const {counter} = useAppSelector(state => state.countSlice);
+  const {count, maxValue, minValue, error, editMode} = useAppSelector(state => state.count);
   const dispatch = useAppDispatch();
 
   const updateCount = (count: number) => {
@@ -17,8 +17,8 @@ export const Count: React.FC = () => {
 
   return (
     <div className={'count-block'}>
-      <Screen counter={counter}/>
-      <CountButtons counter={counter} updateCount={updateCount}/>
+      <Screen count={count} maxValue={maxValue} editMode={editMode} error={error}/>
+      <CountButtons count={count} minValue={minValue} maxValue={maxValue} editMode={editMode} error={error} updateCount={updateCount}/>
     </div>
   )
 }

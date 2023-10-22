@@ -1,18 +1,20 @@
 import React from "react";
 
 import {Button} from "../button/Button";
-import {TSetCounter} from "../../interfaces/interfaces";
 
 import './CountButtons.css';
 
 type CountButtonsPropsType = {
-  counter: TSetCounter
+  minValue: number
+  maxValue: number
+  count: number
+  editMode: boolean
+  error: boolean
   updateCount: (count: number) => void
 }
 
 export const CountButtons: React.FC<CountButtonsPropsType> = (props) => {
-  let {updateCount} = props
-  let {count, minValue, maxValue, error, editMode} = props.counter
+  const {count, minValue, maxValue, error, editMode, updateCount} = props
 
   const increase = () => {
     updateCount(count + 1);

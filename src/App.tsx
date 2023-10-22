@@ -11,7 +11,7 @@ export const App: React.FC = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-      dispatch(loadLS())
+     dispatch(loadLS())
     }
     , [dispatch])
 

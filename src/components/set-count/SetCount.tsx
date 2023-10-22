@@ -8,20 +8,20 @@ import {useAppDispatch, useAppSelector} from "../../hooks/ReduxHooks";
 import './SetCount.css';
 
 export const SetCount: React.FC = () => {
-  const {counter} = useAppSelector(state => state.countSlice);
+  const {editMode, minValue, maxValue, error} = useAppSelector(state => state.count);
   const dispatch = useAppDispatch();
 
   const onSetValue = () => {
-    dispatch(saveLS({counter}))
-  }
+    dispatch(saveLS({count: minValue, editMode, minValue, maxValue, error}))
+  };
 
   return (
     <div className={'set-count-block'}>
-      <InputsBlock minValue={counter.minValue} maxValue={counter.maxValue} error={counter.error}/>
+      <InputsBlock minValue={minValue} maxValue={maxValue} error={error}/>
       <div className={'set-count-button'}>
         <Button
           title={'set'} onClick={onSetValue}
-          disabledButton={counter.error || counter.minValue === counter.maxValue || counter.minValue < 0 || counter.maxValue < 0 || counter.minValue > counter.maxValue}/>
+          disabledButton={error || minValue === maxValue || minValue < 0 || maxValue < 0 || minValue > maxValue}/>
       </div>
     </div>
   )
