@@ -16,12 +16,10 @@ export const CountButtons: React.FC<CountButtonsPropsType> = (props) => {
 
   const increase = () => {
     updateCount(count + 1);
-    localStorage.setItem('counter', JSON.stringify({ minValue, maxValue, count: count+1, editMode, error }))
   }
 
   const reset = () => {
     updateCount(minValue)
-    localStorage.setItem('counter', JSON.stringify({ minValue, maxValue, count: minValue, editMode: false, error }))
   }
 
   return (
