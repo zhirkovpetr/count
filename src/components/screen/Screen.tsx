@@ -1,16 +1,17 @@
 import React from "react";
 
-import {TSetCounter} from "../../interfaces/interfaces";
-
 import './Screen.css';
 
 type ScreenPropsType = {
-  counter: TSetCounter
+  maxValue: number
+  count: number
+  editMode: boolean
+  error: boolean
 }
 
 export const Screen: React.FC<ScreenPropsType> = (props) => {
-  const {editMode, error, maxValue, count} = props.counter
-  
+  const {editMode, error, maxValue, count} = props
+
   return (
     <div className={'count-screen'}>
       <div className={'value'}>
