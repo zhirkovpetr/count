@@ -2,9 +2,7 @@ import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
 
 import {
   TCountSliceState,
-  TGetCounter,
   TSetCount,
-  TSetCounter,
   TSetEditMode,
   TSetError,
   TSetMaxValue,
@@ -19,6 +17,22 @@ export const initialState: TCountSliceState = {
     error: false,
     editMode: true,
 };
+
+export const saveLS = createAsyncThunk(
+  'countSlice/saveLS',
+  async (store: TCountSliceState, {dispatch}) => {
+    localStorage.setItem('counter', JSON.stringify(store));
+    dispatch(setStateLS(store));
+  }
+);
+
+export const loadLS = createAsyncThunk(
+  'countSlice/loadLS',
+  async (_, {dispatch}) => {
+    const count = localStorage.getItem('counter')
+    count && dispatch(getStateLS(JSON.parse(count)))
+  }
+);
 
 const countSlice = createSlice({
   name: 'countSlice',
@@ -39,7 +53,7 @@ const countSlice = createSlice({
     setError: (state, action: PayloadAction<TSetError>) => ({
       ...state, error: action.payload.error
     }),
-    setStateLS: (state, action: PayloadAction<TSetCounter>) => {
+    setStateLS: (state, action: PayloadAction<TCountSliceState>) => {
       return {
         ...state,
           minValue: action.payload.minValue,
@@ -49,7 +63,7 @@ const countSlice = createSlice({
           error: action.payload.error
       }
     },
-    getStateLS: (state, action: PayloadAction<TGetCounter>) => {
+    getStateLS: (state, action: PayloadAction<TCountSliceState>) => {
       return {
         ...state,
           minValue: action.payload.minValue,
@@ -61,22 +75,6 @@ const countSlice = createSlice({
     }
   },
 });
-
-export const saveLS = createAsyncThunk(
-  'countSlice/saveLS',
-  async (store: TSetCounter, {dispatch}) => {
-    localStorage.setItem('counter', JSON.stringify(store));
-    dispatch(setStateLS(store));
-  }
-);
-
-export const loadLS = createAsyncThunk(
-  'countSlice/loadLS',
-  async (_, {dispatch}) => {
-    const count = localStorage.getItem('counter')
-    count && dispatch(getStateLS(JSON.parse(count)))
-  }
-);
 
 export const {setMinValue, setMaxValue, setCount, setEditMode, setError, setStateLS, getStateLS} = countSlice.actions;
 export default countSlice.reducer;
