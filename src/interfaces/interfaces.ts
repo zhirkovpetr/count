@@ -1,3 +1,8 @@
+import {store} from "../redux/store";
+
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch
+
 export type TCountSliceState = {
     minValue: number;
     maxValue: number;
@@ -24,28 +29,4 @@ export type TSetEditMode = {
 
 export type TSetError = {
   error: boolean;
-}
-
-export type TSetCounter = {
-  minValue: number;
-  maxValue: number;
-  count: number;
-  error: boolean;
-  editMode: boolean;
-}
-
-export type TGetCounter = {
-  minValue: number;
-  maxValue: number;
-  count: number;
-  error: boolean;
-  editMode: boolean;
-}
-
-
-export type TResponseSetCounter = {
-  minValue: number;
-  maxValue: number;
-  error: boolean;
-  editMode: boolean;
 }
